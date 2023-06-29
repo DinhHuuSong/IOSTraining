@@ -50,5 +50,4 @@ class UserViewModel {
             delegate?.didLoadDataFailedWith(error)
         }
     }
-
 }

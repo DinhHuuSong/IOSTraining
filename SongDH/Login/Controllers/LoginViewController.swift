@@ -9,8 +9,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    
-    
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var passWord: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
@@ -22,12 +20,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         // Ẩn activityIndicator và errorMessage khi ban đầu
-            activityIndicator.stopAnimating()
-            errorMessage.isHidden = true
+        activityIndicator.stopAnimating()
+        errorMessage.isHidden = true
         
         // Do any additional setup after loading the view.
         self.viewModel = UserViewModel(self, userRepository: UserRepository())
-    
+        
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -77,7 +75,6 @@ class LoginViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
                 return
             }
-            
             // Kiểm tra đăng nhập
             self.viewModel?.login(username: username, password: password)
             
@@ -86,23 +83,20 @@ class LoginViewController: UIViewController {
         }
     }
 
-
-
-    
     func showError(_ message: String) {
         // Hiển thị thông báo lỗi
         errorMessage.isHidden = false
         errorMessage.textColor = .red
         errorMessage.text = message
     }
-
+    
 }
 // MARK: - ViewModelDelegate
 extension LoginViewController : ViewModelDelegate{
     func willLoadData() {
         DispatchQueue.main.async(execute: { () -> Void in
             self.activityIndicator.startAnimating()
-           
+            
         })
     }
     
