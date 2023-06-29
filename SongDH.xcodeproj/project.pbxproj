@@ -13,13 +13,9 @@
 		FB2F98872A4D06B600414530 /* SongDH.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98852A4D06B600414530 /* SongDH.xcdatamodeld */; };
 		FB2F98892A4D06B700414530 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB2F98882A4D06B700414530 /* Assets.xcassets */; };
 		FB2F988C2A4D06B700414530 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2F988A2A4D06B700414530 /* LaunchScreen.storyboard */; };
-		FB2F98972A4D10BF00414530 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98962A4D10BF00414530 /* UserRepository.swift */; };
-		FB2F98992A4D10E200414530 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98982A4D10E200414530 /* NetworkClient.swift */; };
-		FB2F98A12A4D11D400414530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98A02A4D11D400414530 /* User.swift */; };
 		FB2F98A32A4D123000414530 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98A22A4D123000414530 /* LoginViewController.swift */; };
-		FB2F98A52A4D13FD00414530 /* node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98A42A4D13FD00414530 /* node.swift */; };
-		FB2F98A72A4D2A1100414530 /* ViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98A62A4D2A1100414530 /* ViewModelDelegate.swift */; };
-		FB2F98A92A4D2A4000414530 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98A82A4D2A4000414530 /* UserViewModel.swift */; };
+		FB2F98A72A4D2A1100414530 /* LoginModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98A62A4D2A1100414530 /* LoginModelDelegate.swift */; };
+		FB2F98A92A4D2A4000414530 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F98A82A4D2A4000414530 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,13 +27,9 @@
 		FB2F98882A4D06B700414530 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB2F988B2A4D06B700414530 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB2F988D2A4D06B700414530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB2F98962A4D10BF00414530 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
-		FB2F98982A4D10E200414530 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		FB2F98A02A4D11D400414530 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FB2F98A22A4D123000414530 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		FB2F98A42A4D13FD00414530 /* node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = node.swift; sourceTree = "<group>"; };
-		FB2F98A62A4D2A1100414530 /* ViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelDelegate.swift; sourceTree = "<group>"; };
-		FB2F98A82A4D2A4000414530 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		FB2F98A62A4D2A1100414530 /* LoginModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModelDelegate.swift; sourceTree = "<group>"; };
+		FB2F98A82A4D2A4000414530 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +66,7 @@
 				FB2F98852A4D06B600414530 /* SongDH.xcdatamodeld */,
 				FB2F98932A4D104C00414530 /* AppDelegate */,
 				FB2F989B2A4D114100414530 /* Login */,
-				FB2F98952A4D10A300414530 /* Common */,
 				FB2F98942A4D107700414530 /* Resources */,
-				FB2F98A42A4D13FD00414530 /* node.swift */,
 			);
 			path = SongDH;
 			sourceTree = "<group>";
@@ -97,15 +87,6 @@
 				FB2F988A2A4D06B700414530 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		FB2F98952A4D10A300414530 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				FB2F98962A4D10BF00414530 /* UserRepository.swift */,
-				FB2F98982A4D10E200414530 /* NetworkClient.swift */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		FB2F989A2A4D111D00414530 /* Views */ = {
@@ -139,7 +120,7 @@
 		FB2F989D2A4D116C00414530 /* ModelView */ = {
 			isa = PBXGroup;
 			children = (
-				FB2F98A82A4D2A4000414530 /* UserViewModel.swift */,
+				FB2F98A82A4D2A4000414530 /* LoginViewModel.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -147,7 +128,6 @@
 		FB2F989E2A4D117C00414530 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB2F98A02A4D11D400414530 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,7 +135,7 @@
 		FB2F989F2A4D118A00414530 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				FB2F98A62A4D2A1100414530 /* ViewModelDelegate.swift */,
+				FB2F98A62A4D2A1100414530 /* LoginModelDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -234,13 +214,9 @@
 				FB2F98A32A4D123000414530 /* LoginViewController.swift in Sources */,
 				FB2F987D2A4D06B600414530 /* AppDelegate.swift in Sources */,
 				FB2F98872A4D06B600414530 /* SongDH.xcdatamodeld in Sources */,
-				FB2F98A52A4D13FD00414530 /* node.swift in Sources */,
-				FB2F98A72A4D2A1100414530 /* ViewModelDelegate.swift in Sources */,
-				FB2F98972A4D10BF00414530 /* UserRepository.swift in Sources */,
+				FB2F98A72A4D2A1100414530 /* LoginModelDelegate.swift in Sources */,
 				FB2F987F2A4D06B600414530 /* SceneDelegate.swift in Sources */,
-				FB2F98992A4D10E200414530 /* NetworkClient.swift in Sources */,
-				FB2F98A92A4D2A4000414530 /* UserViewModel.swift in Sources */,
-				FB2F98A12A4D11D400414530 /* User.swift in Sources */,
+				FB2F98A92A4D2A4000414530 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

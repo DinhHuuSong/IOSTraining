@@ -8,13 +8,13 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var passWord: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var viewModel: UserViewModel?
+    var viewModel: LoginViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,83 +24,39 @@ class LoginViewController: UIViewController {
         errorMessage.isHidden = true
         
         // Do any additional setup after loading the view.
-        self.viewModel = UserViewModel(self, userRepository: UserRepository())
+        self.viewModel = LoginViewModel(self)
         
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
-        // Kiểm tra và hiển thị thông báo lỗi nếu có
-        if let errorMessage = validateInput() {
-            showError(errorMessage)
+        // Kiểm tra tên người dùng và mật khẩu
+        guard let username = userName.text, let password = passWord.text else {
+            return
+        }
+        //Kiểm tra validation
+        let validationError: String? = viewModel?.validateInput(username: username, password: password)
+        
+        //nếu có lỗi validation thì dừng và thông báo
+        if let error = validationError {
+            errorMessage.isHidden = false
+            errorMessage.text = error
             return
         }
         
-        // Gọi hàm login
-        login()
-    }
-    
-    func validateInput() -> String? {
-        if let username = userName.text {
-            if username.isEmpty {
-                return "Please enter username"
-            } else if username.count < 4 {
-                return "Username must be at least 4 characters"
-            }
-        } else {
-            return "Please enter username"
-        }
-        
-        if let password = passWord.text {
-            if password.isEmpty {
-                return "Please enter password"
-            } else if password.count < 4 {
-                return "Password must be at least 4 characters"
-            }
-        } else {
-            return "Please enter password"
-        }
-        
-        return nil
-    }
-    
-    func login() {
-        // Hiển thị activity indicator
-        activityIndicator.startAnimating()
-        
-        // Kiểm tra đăng nhập sau 3 giây
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            // Lấy giá trị username và password
-            guard let username = self.userName.text, let password = self.passWord.text else {
-                self.showError("Login failed")
-                self.activityIndicator.stopAnimating()
-                return
-            }
-            // Kiểm tra đăng nhập
-            self.viewModel?.login(username: username, password: password)
-            
-            // Dừng activity indicator
-            self.activityIndicator.stopAnimating()
-        }
-    }
-
-    func showError(_ message: String) {
-        // Hiển thị thông báo lỗi
-        errorMessage.isHidden = false
-        errorMessage.textColor = .red
-        errorMessage.text = message
+        // Gọi phương thức Login của viewModel để bắt đầu quá trình đăng nhập
+        viewModel?.Login(username: username, password: password)
     }
     
 }
 // MARK: - ViewModelDelegate
-extension LoginViewController : ViewModelDelegate{
-    func willLoadData() {
+extension LoginViewController : LoginModelDelegate{
+    func willLogin() {
         DispatchQueue.main.async(execute: { () -> Void in
             self.activityIndicator.startAnimating()
-            
         })
     }
     
-    func didLoadData() {
+    func didLogin() {
         DispatchQueue.main.async(execute: { () -> Void in
             self.activityIndicator.stopAnimating()
             // Hiển thị thông báo thành công
@@ -110,7 +66,7 @@ extension LoginViewController : ViewModelDelegate{
         })
     }
     
-    func didLoadDataFailedWith(_ error: Error?) {
+    func didLoginFailedWith(_ error: Error?) {
         DispatchQueue.main.async(execute: { () -> Void in
             self.activityIndicator.stopAnimating()
             if let error = error {
