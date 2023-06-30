@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Controller for managing login screen UI
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var userName: UITextField!
@@ -19,64 +20,82 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Ẩn activityIndicator và errorMessage khi ban đầu
-        activityIndicator.stopAnimating()
-        errorMessage.isHidden = true
-        
-        // Do any additional setup after loading the view.
-        self.viewModel = LoginViewModel(self)
+        // Hide activityIndicator and errorMessage at the start
+                activityIndicator.stopAnimating()
+                errorMessage.isHidden = true
+                
+                // Do any additional setup after loading the view.
+                self.viewModel = LoginViewModel(self)
         
     }
     
+    // This function is triggered when the login button is tapped.
+    // It calls the `buttonAction(username:password:)` method from the ViewModel
+    // passing the current text values of the username and password fields.
     @IBAction func loginButtonTapped(_ sender: Any) {
-        // Kiểm tra tên người dùng và mật khẩu
-        guard let username = userName.text, let password = passWord.text else {
-            return
-        }
-        //Kiểm tra validation
-        let validationError: String? = viewModel?.validateInput(username: username, password: password)
-        
-        //nếu có lỗi validation thì dừng và thông báo
-        if let error = validationError {
-            errorMessage.isHidden = false
-            errorMessage.text = error
-            return
-        }
-        
-        // Gọi phương thức Login của viewModel để bắt đầu quá trình đăng nhập
-        viewModel?.Login(username: username, password: password)
+        viewModel?.buttonAction(username: userName.text, password: passWord.text)
     }
-    
+
+
+ 
+
 }
 // MARK: - ViewModelDelegate
 extension LoginViewController : LoginModelDelegate{
+    // Function called when before login action.
     func willLogin() {
-        DispatchQueue.main.async(execute: { () -> Void in
+        // Schedule a block of code for execution on the main queue. This is important because
+        // all UI updates should be performed on the main thread.
+        DispatchQueue.main.async {
+            // Start the activity indicator to show that the login process has begun.
             self.activityIndicator.startAnimating()
-        })
+        }
     }
+
     
+    // Function called when login successful.
     func didLogin() {
-        DispatchQueue.main.async(execute: { () -> Void in
+        // Schedule UI updates on the main queue for smooth user experience
+        DispatchQueue.main.async {
+            // Stop and hide the activity indicator on successful login
             self.activityIndicator.stopAnimating()
-            // Hiển thị thông báo thành công
+            
+            // Display a success message to the user via the 'errorMessage' label
             self.errorMessage.isHidden = false
             self.errorMessage.textColor = .green
             self.errorMessage.text = "Login successful"
-        })
+        }
     }
+
+
     
+    // Function called when login fails.
+    // Displays an error message depending on the type of error received.
     func didLoginFailedWith(_ error: Error?) {
-        DispatchQueue.main.async(execute: { () -> Void in
+        // Always update UI elements on the main queue.
+        DispatchQueue.main.async {
+            // Stop the activity indicator as the login process has finished.
             self.activityIndicator.stopAnimating()
-            if let error = error {
-                self.errorMessage.isHidden = false
-                self.errorMessage.text = error.localizedDescription
-            } else {
-                self.errorMessage.isHidden = false
-                self.errorMessage.text = "Incorrect Username or password !"
-                self.errorMessage.textColor = .red
+
+            // If the error is of type ValidationError
+            guard let validationError = error as? ValidationError else {
+                // If the error is not a ValidationError, no further action is taken.
+                // You might want to handle this case differently depending on your requirements.
+                return
             }
-        })
+
+            // If we get this far, it means we have a ValidationError.
+            // The error message is not hidden anymore.
+            self.errorMessage.isHidden = false
+            // Set the error message to the error message from the ValidationError.
+            self.errorMessage.text = validationError.errorMessage
+            // Set the text color to red to highlight the error message.
+            self.errorMessage.textColor = .red
+        }
     }
 }
+
+
+
+
+
